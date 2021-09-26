@@ -62,22 +62,26 @@ function currentWeather(city) {
             console.log(data);
         
         var uvIndex=data.current.uvi;
-        console.log(uvIndex)
+        console.log(uvIndex);
         var currentDate= data.current.dt;
         console.log(currentDate);
         var convertedDate = moment.unix(currentDate).format(("  MMM Do, YYYY"));
-        console.log(convertedDate)
+        console.log(convertedDate);
+        //Icon not working....
+        var currentIcon = data.current.weather.icon;
+        console.log(currentIcon);
 
-        var dailyForcast= [
-            {
+        var arrayDay= data.daily;
+        for(var i =1; i<6, i++;);
+        console.log(arrayDay);
 
-            }
-        ]
+
 
        
 
         document.getElementById("uv").innerHTML = "UV Index: " + uvIndex;
         document.getElementById("date").innerHTML = convertedDate;
+        document.getElementById("currentIcon").innerHTML= currentIcon;
 
 
     
