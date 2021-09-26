@@ -53,7 +53,7 @@ function currentWeather(city) {
 
 
  function uv(lat, lon){
-     var oneDayURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" +lat +"&lon=" +lon + "&exclude=hourly,minutely&appid="+ apiKey + "&units=imperial";
+     var oneDayURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" +lon + "&exclude=minutely,hourly&appid="+ apiKey + "&units=imperial";
      fetch(oneDayURL)
         .then(function(res){
             return res.json()
@@ -61,9 +61,33 @@ function currentWeather(city) {
         .then(function(data){
             console.log(data);
         
+        var uvIndex=data.current.uvi;
+        console.log(uvIndex)
+        var currentDate= data.current.dt;
+        console.log(currentDate);
+        var convertedDate = moment.unix(currentDate).format(("  MMM Do, YYYY"));
+        console.log(convertedDate)
 
-        })
- }
+        var dailyForcast= [
+            {
+
+            }
+        ]
+
+       
+
+        document.getElementById("uv").innerHTML = "UV Index: " + uvIndex;
+        document.getElementById("date").innerHTML = convertedDate;
+
+
+    
+   
+  
+    
+
+        });
+    }
+ 
 
 function searchHandler(event){
 if(!cityInput.value){
@@ -73,7 +97,7 @@ event.preventDefault();
     var input = cityInput.value.trim();
     console.log(input);
     currentWeather(input);
-    oneDayURL(input);
+    uv(input);
     cityInput.value = '';
 };
 
