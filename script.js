@@ -71,27 +71,77 @@ function currentWeather(city) {
         var currentIcon = data.current.weather.icon;
         console.log(currentIcon);
 
-        var arrayDay= data.daily;
-        for(var i =1; i<6, i++;);
-        console.log(arrayDay);
+        var arrayDay = data.daily;
+        console.log(arrayDay)
 
+        var date1 = data.daily[1].dt;
+        var date2 = data.daily[2].dt;
+        var date3 = data.daily[3].dt;
+        var date4 = data.daily[4].dt;
+        var date5 = data.daily[5].dt;
+        
+        var convertDate1 = moment.unix(date1).format(("  MMM Do, YYYY"));
+        var convertDate2 = moment.unix(date2).format(("  MMM Do, YYYY"));
+        var convertDate3 = moment.unix(date3).format(("  MMM Do, YYYY"));
+        var convertDate4 = moment.unix(date4).format(("  MMM Do, YYYY"));
+        var convertDate5 = moment.unix(date5).format(("  MMM Do, YYYY"));
+            console.log(convertDate5)
 
+        var temp1 = data.daily[1].temp.day;
+        var temp2 = data.daily[2].temp.day;
+        var temp3 = data.daily[3].temp.day;
+        var temp4 = data.daily[4].temp.day;
+        var temp5 = data.daily[5].temp.day;
 
-       
+        var wind1 = data.daily[1].wind_speed;
+        var wind2 = data.daily[2].wind_speed;
+        var wind3 = data.daily[3].wind_speed;
+        var wind4 = data.daily[4].wind_speed;
+        var wind5 = data.daily[5].wind_speed;
+
+        var humidity1 = data.daily[1].humidity;
+        var humidity2 = data.daily[2].humidity;
+        var humidity3 = data.daily[3].humidity;
+        var humidity4 = data.daily[4].humidity;
+        var humidity5 = data.daily[5].humidity;
+
 
         document.getElementById("uv").innerHTML = "UV Index: " + uvIndex;
         document.getElementById("date").innerHTML = convertedDate;
         document.getElementById("currentIcon").innerHTML= currentIcon;
 
+        document.getElementById("date1").innerHTML = convertDate1;
+        document.getElementById("date2").innerHTML = convertDate2;
+        document.getElementById("date3").innerHTML = convertDate3;
+        document.getElementById("date4").innerHTML = convertDate4;
+        document.getElementById("date5").innerHTML = convertDate5;
+
+        document.getElementById("temp1").innerHTML = "Temp: " +temp1 + "F";
+        document.getElementById("temp2").innerHTML = "Temp: " +temp2  + "F";
+        document.getElementById("temp3").innerHTML = "Temp: " +temp3  + "F";
+        document.getElementById("temp4").innerHTML = "Temp: " +temp4  + "F";
+        document.getElementById("temp5").innerHTML = "Temp: " +temp5  + "F";
+
+        document.getElementById("wind1").innerHTML = "Wind Speed: " +wind1 + "MPH";
+        document.getElementById("wind2").innerHTML = "Wind Speed: " +wind2 + "MPH";
+        document.getElementById("wind3").innerHTML = "Wind Speed: " +wind3 + "MPH";
+        document.getElementById("wind4").innerHTML = "Wind Speed: " +wind4 + "MPH";
+        document.getElementById("wind5").innerHTML = "Wind Speed: " +wind5 + "MPH";
+
+        document.getElementById("humidity1").innerHTML = "Humidity " +humidity1 + "%";
+        document.getElementById("humidity2").innerHTML = "Humidity " +humidity2 + "%";
+        document.getElementById("humidity3").innerHTML = "Humidity " +humidity3 + "%";
+        document.getElementById("humidity4").innerHTML = "Humidity " +humidity4 + "%";
+        document.getElementById("humidity5").innerHTML = "Humidity " +humidity5 + "%";
+
+
 
     
-   
-  
     
 
         });
     }
- 
+
 
 function searchHandler(event){
 if(!cityInput.value){
@@ -102,10 +152,16 @@ event.preventDefault();
     console.log(input);
     currentWeather(input);
     uv(input);
+    storeCity();
     cityInput.value = '';
 };
 
 searchBtnEl.addEventListener("click", searchHandler);
+
+function storeCity(){
+    var storedCity = cityInput.value;
+    localStorage.setItem("city", storedCity);
+}
 
 
 
