@@ -90,11 +90,11 @@ function uv(lat, lon) {
             var date4 = data.daily[4].dt;
             var date5 = data.daily[5].dt;
 
-            var convertDate1 = moment.unix(date1).format(("  MMM Do, YYYY"));
-            var convertDate2 = moment.unix(date2).format(("  MMM Do, YYYY"));
-            var convertDate3 = moment.unix(date3).format(("  MMM Do, YYYY"));
-            var convertDate4 = moment.unix(date4).format(("  MMM Do, YYYY"));
-            var convertDate5 = moment.unix(date5).format(("  MMM Do, YYYY"));
+            var convertDate1 = moment.unix(date1).format(("MM/DD/YYYY"));
+            var convertDate2 = moment.unix(date2).format(("MM/DD/YYYY"));
+            var convertDate3 = moment.unix(date3).format(("MM/DD/YYYY"));
+            var convertDate4 = moment.unix(date4).format(("MM/DD/YYYY"));
+            var convertDate5 = moment.unix(date5).format(("MM/DD/YYYY"));
             console.log(convertDate5)
 
             var temp1 = data.daily[1].temp.day;
@@ -127,8 +127,6 @@ function uv(lat, lon) {
             var currentIconUrl4 = "http://openweathermap.org/img/wn/" + icon4 + ".png";
             var currentIconUrl5 = "http://openweathermap.org/img/wn/" + icon5 + ".png";
 
-
-
             $("#weatherIcon1").attr("src", currentIconUrl1);
             $("#weatherIcon2").attr("src", currentIconUrl2);
             $("#weatherIcon3").attr("src", currentIconUrl3);
@@ -138,7 +136,6 @@ function uv(lat, lon) {
             $("#weatherIcon").attr("src", currentIconUrl);
             document.getElementById("uv").innerHTML = " " + uvIndex;
             document.getElementById("date").innerHTML = convertedDate;
-            // document.getElementById("currentIcon").innerHTML = currentIconUrl;
 
             document.getElementById("date1").innerHTML = convertDate1;
             document.getElementById("date2").innerHTML = convertDate2;
@@ -186,14 +183,14 @@ function uv(lat, lon) {
         var storedCity = cityInput.value;
         localStorage.setItem("city", storedCity);
 
-        var cityList = document.createElement("li");
+        var cityList = document.createElement("p");
+        cityList.className ="cityNames";
 
         function renderCities() {
             var list = document.getElementById("listCities");
             list.appendChild(cityList);
             var render = localStorage.getItem("city");
             cityList.innerHTML = render;
-            // cityList.addClass("list-group-item");
         }
         renderCities();
         console.log(renderCities)

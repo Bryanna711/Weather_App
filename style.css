@@ -22,3 +22,18 @@ header{
     background-color:transparent;
 }
 
+
+
+.cityNames{
+text-align: center;
+padding: 10px;
+background-color: lightgrey;
+border-radius: 10px;
+}
+
+.searchBtn{
+    width : 90%;
+}
+ul{
+    align-content: center;
+}
