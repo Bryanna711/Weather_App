@@ -1,0 +1,53 @@
+header{
+    background-color: darkblue;
+    color:white;
+    font-family: 'Holtwood One SC', serif;
+}
+
+.card-body{
+    background-color: midnightblue;
+    color:white;
+}
+
+.cityList{
+    background-color: blue;
+    color:white;
+    padding:5px;
+    padding-right: 7px;
+}
+
+.uvClass{
+    padding:5px;
+    border-radius: 10%;
+    background-color:transparent;
+}
+
+.safe{
+    padding:5px;
+    border-radius: 10%;
+    background-color:green;
+}
+
+.moderate{
+    padding:5px;
+    border-radius: 10%;
+    background-color:yellowgreen;
+}
+
+.high{
+    padding:5px;
+    border-radius: 10%;
+    background-color: orange;
+}
+
+.veryhigh{
+    padding:5px;
+    border-radius: 10%;
+    background-color: orangered;
+}
+
+.dangerzone{
+    padding:5px;
+    border-radius: 10%;
+    background-color: red;
+}
