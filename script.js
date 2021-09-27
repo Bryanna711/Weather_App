@@ -36,15 +36,11 @@ function currentWeather(city) {
                 var lon = data.coord.lon;
                 console.log(lon);
                 uv(lat, lon);
-                console.log(data[1])
             }
             pullWeatherData(data);
         });
 
 };
-
-
-
 
 
 function uv(lat, lon) {
@@ -59,24 +55,24 @@ function uv(lat, lon) {
             var uvIndex = data.current.uvi;
             console.log(uvIndex);
 
-            function uvColor() {
-                if (2> uvIndex >= 0) {
-                    $("uvClass").toggleClass("safe");
+            // function uvColor() {
+                if (2> uvIndex && uvIndex >= 0) {
+                    $(".uvClass").css("background-color","green");
                 }
-                else if (2< uvIndex <= 5) {
-                    $("uvClass").toggleClass("moderate");
+                else if (2< uvIndex && uvIndex <= 5) {
+                    $(".uvClass").css("background-color","yellow");
                 }
-                else if (5< uvIndex <= 7) {
-                    $("uvClass").toggleClass("high");
+                else if (5< uvIndex && uvIndex <= 7) {
+                    $(".uvClass").css("background-color","orange");
                 }
-                else if (7< uvIndex <= 10) {
-                    $("uvClass").toggleClass("veryhigh");
+                else if (7< uvIndex && uvIndex <= 10) {
+                    $(".uvClass").css("background-color","orange-red");
                 }
                 else if (uvIndex > 10) {
-                    $("uvClass").toggleClass("dangerzone");
+                    $(".uvClass").css("background-color","purple");
                 };
-            };
-            uvColor();
+            // };
+            // uvColor();
 
             var currentDate = data.current.dt;
             console.log(currentDate);
@@ -84,11 +80,9 @@ function uv(lat, lon) {
             console.log(convertedDate);
 
             //Icon not working....
-            var currentIcon = data.current.weather.icon;
+            var currentIcon = data.current.weather[0].icon;
             console.log(currentIcon);
-
-            var arrayDay = data.daily;
-            console.log(arrayDay)
+            var currentIconUrl = "http://openweathermap.org/img/wn/" + currentIcon + ".png";
 
             var date1 = data.daily[1].dt;
             var date2 = data.daily[2].dt;
@@ -121,10 +115,30 @@ function uv(lat, lon) {
             var humidity4 = data.daily[4].humidity;
             var humidity5 = data.daily[5].humidity;
 
+            var icon1 = data.daily[1].weather[0].icon;
+            var icon2 = data.daily[2].weather[0].icon;
+            var icon3 = data.daily[3].weather[0].icon;
+            var icon4 = data.daily[4].weather[0].icon;
+            var icon5 = data.daily[5].weather[0].icon;
 
+            var currentIconUrl1 = "http://openweathermap.org/img/wn/" + icon1 + ".png";
+            var currentIconUrl2 = "http://openweathermap.org/img/wn/" + icon2 + ".png";
+            var currentIconUrl3 = "http://openweathermap.org/img/wn/" + icon3 + ".png";
+            var currentIconUrl4 = "http://openweathermap.org/img/wn/" + icon4 + ".png";
+            var currentIconUrl5 = "http://openweathermap.org/img/wn/" + icon5 + ".png";
+
+
+
+            $("#weatherIcon1").attr("src", currentIconUrl1);
+            $("#weatherIcon2").attr("src", currentIconUrl2);
+            $("#weatherIcon3").attr("src", currentIconUrl3);
+            $("#weatherIcon4").attr("src", currentIconUrl4);
+            $("#weatherIcon5").attr("src", currentIconUrl5);
+
+            $("#weatherIcon").attr("src", currentIconUrl);
             document.getElementById("uv").innerHTML = " " + uvIndex;
             document.getElementById("date").innerHTML = convertedDate;
-            document.getElementById("currentIcon").innerHTML = currentIcon;
+            // document.getElementById("currentIcon").innerHTML = currentIconUrl;
 
             document.getElementById("date1").innerHTML = convertDate1;
             document.getElementById("date2").innerHTML = convertDate2;
