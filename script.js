@@ -42,7 +42,6 @@ function currentWeather(city) {
 
 };
 
-
 function uv(lat, lon) {
     var oneDayURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey + "&units=imperial";
     fetch(oneDayURL)
@@ -56,30 +55,27 @@ function uv(lat, lon) {
             console.log(uvIndex);
 
             // function uvColor() {
-                if (2> uvIndex && uvIndex >= 0) {
-                    $(".uvClass").css("background-color","green");
-                }
-                else if (2< uvIndex && uvIndex <= 5) {
-                    $(".uvClass").css("background-color","yellow");
-                }
-                else if (5< uvIndex && uvIndex <= 7) {
-                    $(".uvClass").css("background-color","orange");
-                }
-                else if (7< uvIndex && uvIndex <= 10) {
-                    $(".uvClass").css("background-color","orange-red");
-                }
-                else if (uvIndex > 10) {
-                    $(".uvClass").css("background-color","purple");
-                };
-            // };
-            // uvColor();
+            if (2 > uvIndex && uvIndex >= 0) {
+                $(".uvClass").css("background-color", "green");
+            }
+            else if (2 < uvIndex && uvIndex <= 5) {
+                $(".uvClass").css("background-color", "yellow");
+            }
+            else if (5 < uvIndex && uvIndex <= 7) {
+                $(".uvClass").css("background-color", "orange");
+            }
+            else if (7 < uvIndex && uvIndex <= 10) {
+                $(".uvClass").css("background-color", "orange-red");
+            }
+            else if (uvIndex > 10) {
+                $(".uvClass").css("background-color", "purple");
+            };
 
             var currentDate = data.current.dt;
             console.log(currentDate);
             var convertedDate = moment.unix(currentDate).format(("  MMM Do, YYYY"));
             console.log(convertedDate);
 
-            //Icon not working....
             var currentIcon = data.current.weather[0].icon;
             console.log(currentIcon);
             var currentIconUrl = "http://openweathermap.org/img/wn/" + currentIcon + ".png";
@@ -162,39 +158,55 @@ function uv(lat, lon) {
             document.getElementById("humidity5").innerHTML = "Humidity " + humidity5 + "%";
         }
 
-        )};
+        )
+};
 
-    searchBtnEl.addEventListener("click", searchHandler);
+searchBtnEl.addEventListener("click", searchHandler);
 
-    function searchHandler(event) {
-        if (!cityInput.value) {
-            return
-        }
-        event.preventDefault();
-        var input = cityInput.value.trim();
-        console.log(input);
-        currentWeather(input);
-        // uv(input);
-        storeCity();
-        cityInput.value = '';
-    };
+function searchHandler(event) {
+    if (!cityInput.value) {
+        return
+    }
+    event.preventDefault();
+    var input = cityInput.value.trim();
+    console.log(input);
+    currentWeather(input);
+    storeCity();
+    cityInput.value = '';
+};
 
-    function storeCity() {
+function storeCity() {
+    var allCities = JSON.parse(localStorage.getItem("city"));
+    if (allCities == null) {
+        allCities = [cityInput.value]
+    }
+    else {
         var storedCity = cityInput.value;
-        localStorage.setItem("city", storedCity);
+        allCities.unshift(storedCity);
+    }
+    localStorage.setItem("city", JSON.stringify(allCities));
+}
 
+function renderCities() {
+
+    var allCities = JSON.parse(localStorage.getItem("city"));
+    for (var i = 0; i < allCities.length; i++) {
+        cityList.innerHTML = allCities[i];
         var cityList = document.createElement("p");
-        cityList.className ="cityNames";
+        var cityBtn = document.createElement("button");
+        cityList.className = "cityNames";
+        var list = document.getElementById("listCities");
+        list.appendChild(cityList);
+        list.appendChild(cityBtn);
+    }
+    window.onload(renderCities);
 
-        function renderCities() {
-            var list = document.getElementById("listCities");
-            list.appendChild(cityList);
-            var render = localStorage.getItem("city");
-            cityList.innerHTML = render;
-        }
-        renderCities();
-        console.log(renderCities)
-    };
+    cityBtn.addEventListener("click", function () {
+        var city = $(this).text();
+        currentweather(city);
+    })
+}
+
 
 
 

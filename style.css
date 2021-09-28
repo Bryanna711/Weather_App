@@ -1,19 +1,12 @@
 header{
-    background-color: darkblue;
     color:white;
     font-family: 'Holtwood One SC', serif;
+    background-image:linear-gradient(rgb(60, 41, 223), rgb(18, 56, 138))
 }
 
 .card-body{
-    background-color: midnightblue;
+    background-color: rgb(24, 64, 97);
     color:white;
-}
-
-.cityList{
-    background-color: blue;
-    color:white;
-    padding:5px;
-    padding-right: 7px;
 }
 
 .uvClass{
@@ -22,18 +15,23 @@ header{
     background-color:transparent;
 }
 
-
-
 .cityNames{
 text-align: center;
-padding: 10px;
+padding-right: 30px;
+padding-left: 30px;
+padding-top: 5px;
+padding-bottom: 5px; 
 background-color: lightgrey;
-border-radius: 10px;
+border-radius: 5px;
+margin-left: 0px;
+} 
+
+#listCities{
+padding-right: 30px;
+padding-left: 30px;
 }
 
 .searchBtn{
-    width : 90%;
+    width : 100%;
 }
-ul{
-    align-content: center;
-}
+
