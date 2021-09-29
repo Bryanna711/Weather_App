@@ -175,12 +175,13 @@ function searchHandler(event) {
     currentWeather(input);
     storeCity();
     cityInput.value = '';
+    renderCities();
 };
 
 //This stores the users input
 function storeCity() {
     var allCities = JSON.parse(localStorage.getItem("city"));
-    if (allCities == null) {
+    if (allCities === null) {
         allCities = [cityInput.value]
     }
     else {
@@ -188,27 +189,33 @@ function storeCity() {
         allCities.unshift(storedCity);
     }
     localStorage.setItem("city", JSON.stringify(allCities));
+    
 }
 //This is *supposed* to render the data to the page as well as set the rendertext to a button to be clicked to load the text into the user input field 
 function renderCities() {
-
     var allCities = JSON.parse(localStorage.getItem("city"));
-    for (var i = 0; i < allCities.length; i++) {
+    for (var i = 0; i < allCities.length; i++); {
         var cityList = document.createElement("p");
         cityList.innerHTML = allCities[i];
-        var cityBtn = document.createElement("button");
+        console.log(allCities[i]);
         cityList.className = "cityNames";
         var list = document.getElementById("listCities");
         list.appendChild(cityList);
-        list.appendChild(cityBtn);
     }
-    window.onload(renderCities);
-
-    cityBtn.addEventListener("click", function () {
+    cityList.addEventListener("click", function () {
         var city = $(this).text();
         currentWeather(city);
     })
 }
+
+window.onload(renderCities());
+
+
+var renderBtn= document.createElement("button");
+
+$("temp").appendChild(renderBtn);
+
+renderBtn.addEventListener("click",renderCities())
 
 
 
