@@ -1,1 +1,1 @@
-# Weather_App
+A simple weather app with 5 day forecast, built with HTML, CSS, and JavaScript.
