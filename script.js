@@ -3,9 +3,9 @@ var cityInput = document.getElementById("cityInput");
 var searchBtnEl = document.querySelector(".searchBtn");
 var input = cityInput.value.trim()
 
+//This pulls current weather data and writes it to the HTML
 function currentWeather(city) {
     var currentURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey + "&units=imperial";
-    //api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial
 
     fetch(currentURL)
         .then(function (res) {
@@ -29,7 +29,7 @@ function currentWeather(city) {
             document.getElementById("wind").innerHTML = "Wind: " + wind + " MPH";
             document.getElementById("humidity").innerHTML = "Humidity: " + humidity + "%";
             document.getElementById("cityEntered").innerHTML = cityName;
-
+            // This pulls both lon and lat to be used in the next API call that is required for UV and Five Day Forecast
             function pullWeatherData(data) {
                 var lat = data.coord.lat;
                 console.log(lat);
@@ -42,6 +42,7 @@ function currentWeather(city) {
 
 };
 
+//This both sets up the color variation on the uvIndex as well as pulls the data from the oneCall API for the five day forcast and UV and writes it to the HTML
 function uv(lat, lon) {
     var oneDayURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey + "&units=imperial";
     fetch(oneDayURL)
@@ -54,7 +55,6 @@ function uv(lat, lon) {
             var uvIndex = data.current.uvi;
             console.log(uvIndex);
 
-            // function uvColor() {
             if (2 > uvIndex && uvIndex >= 0) {
                 $(".uvClass").css("background-color", "green");
             }
@@ -161,8 +161,10 @@ function uv(lat, lon) {
         )
 };
 
+
 searchBtnEl.addEventListener("click", searchHandler);
 
+//This function initializes the call for the data and as well as the function for the storage of the input for future selection
 function searchHandler(event) {
     if (!cityInput.value) {
         return
@@ -175,6 +177,7 @@ function searchHandler(event) {
     cityInput.value = '';
 };
 
+//This stores the users input
 function storeCity() {
     var allCities = JSON.parse(localStorage.getItem("city"));
     if (allCities == null) {
@@ -186,13 +189,13 @@ function storeCity() {
     }
     localStorage.setItem("city", JSON.stringify(allCities));
 }
-
+//This is *supposed* to render the data to the page as well as set the rendertext to a button to be clicked to load the text into the user input field 
 function renderCities() {
 
     var allCities = JSON.parse(localStorage.getItem("city"));
     for (var i = 0; i < allCities.length; i++) {
-        cityList.innerHTML = allCities[i];
         var cityList = document.createElement("p");
+        cityList.innerHTML = allCities[i];
         var cityBtn = document.createElement("button");
         cityList.className = "cityNames";
         var list = document.getElementById("listCities");
@@ -203,7 +206,7 @@ function renderCities() {
 
     cityBtn.addEventListener("click", function () {
         var city = $(this).text();
-        currentweather(city);
+        currentWeather(city);
     })
 }
 
